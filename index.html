@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>First task</h2>
+    <!--<script>-->
+        <!--var integer = 100;-->
+        <!--for(var i = 0; i <= integer; i++) {-->
+            <!--if (i % 3 === 0 && i % 5 === 0) {-->
+                <!--document.write(i + ' FizzBuzz' + '<br/>');-->
+            <!--} else if (i % 5 === 0 && i % 3 !== 0) {-->
+                <!--document.write(i + ' Buzz' + '<br/>');-->
+            <!--} else if (i % 3 === 0) {-->
+                <!--document.write(i + ' Fizz' + '<br/>');-->
+            <!--} else {-->
+                <!--document.write(i + '<br/>');-->
+            <!--}-->
+        <!--}-->
+    <!--</script>-->
+
+    <h2>Second task</h2>
+    <p>Palindrom check</p>
+    <input type="text" placeholder="Check something" id="palindrom">
+    <span id="palindromResult"></span>
+    <script>
+        var someValue = document.getElementById('palindrom');
+        function checkPalindrom (str) {
+            if(str === str.split('').reverse().join('')) {
+                document.getElementById('palindromResult').innerHTML = ("It's palindrom");
+            } else {
+                document.getElementById('palindromResult').innerHTML = ("It's not a palindrom");
+            }
+        }
+        someValue.addEventListener('change', function () {
+            checkPalindrom(this.value);
+        })
+    </script>
+
+    <h2>Third task</h2>
+    <p>Register check</p>
+    <input type="text" placeholder="Enter your text" id="originalText">
+    <input type="button" id="formateTextButton" value="==>">
+    <input type="text" id="formattedText">
+    <script>
+        var originalText = document.getElementById('originalText');
+        function transformToAnotherCase(str) {
+            var splitedText = str.split('');
+            var formattedText = [];
+            for(var i = 0; i < splitedText.length; i++) {
+                if (splitedText[i] === splitedText[i].toLowerCase()) {
+                    formattedText += splitedText[i].toUpperCase()
+                } else  {
+                    formattedText += splitedText[i].toLowerCase()
+                }
+            }
+
+            return formattedText;
+        }
+
+        document.getElementById('formateTextButton').addEventListener('click', function () {
+            var result = transformToAnotherCase(originalText.value);
+            document.getElementById('formattedText').setAttribute('value', result);
+        })
+    </script>
+
+    <h2>Fourth task</h2>
+    <p>Anagram check</p>
+    <input type="text">
+    <span>VS</span>
+    <input type="text">
+</body>
+</html>
