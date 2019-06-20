@@ -68,8 +68,123 @@
 
     <h2>Fourth task</h2>
     <p>Anagram check</p>
-    <input type="text">
+    <input type="text" placeholder="Enter first word" id="firstAnagramWord">
     <span>VS</span>
-    <input type="text">
+    <input type="text" placeholder="Enter second word" id="secondAnagramWord">
+    <input type="button" id="anagramCheckButton" value="==>">
+    <span id="anagramResult"></span>
+    <script>
+        var firstAnagramWord = document.getElementById('firstAnagramWord');
+        var secondAnagramWord = document.getElementById('secondAnagramWord');
+        var sortWord = function (str) {
+            return str.replace(/\s+/g, '').toLowerCase().split('').sort().join('');
+        };
+        function anagramCheck(firstWord, secondWord) {
+            if (firstWord.trim() === secondWord.trim() || sortWord(firstWord) !== sortWord(secondWord)) {
+                document.getElementById('anagramResult').innerHTML = ("It's not an anagram");
+            } else if (sortWord(firstWord) === sortWord(secondWord)) {
+                document.getElementById('anagramResult').innerHTML = ("It's an anagram");
+            }
+        }
+        document.getElementById('anagramCheckButton').addEventListener('click', function () {
+            anagramCheck(firstAnagramWord.value, secondAnagramWord.value);
+        });
+    </script>
+
+    <h2>Fifth task</h2>
+    <p>Self made reverse()</p>
+    <label for="valueBeforeReverse">Before reverse: </label>
+    <input type="text" id="valueBeforeReverse" placeholder="Use , for separate">
+    <input type="button" value="==>" id="reverseButton">
+    <label for="valueAfterReverse">After reverse: </label>
+    <input type="text" id="valueAfterReverse">
+    <script>
+        var stringBeforeReverse = document.getElementById('valueBeforeReverse');
+        function selfMadeReverse(arr) {
+            var stringSplited = arr.split(',');
+            var arrAfterReverse = [];
+            for (var i = 0; i < stringSplited.length; i++) {
+                arrAfterReverse.unshift(stringSplited[i]);
+            }
+            return arrAfterReverse;
+        }
+        document.getElementById('reverseButton').addEventListener('click', function () {
+            var result = selfMadeReverse(stringBeforeReverse.value).join(',');
+            document.getElementById('valueAfterReverse').setAttribute('value', result);
+        })
+    </script>
+
+    <h2>Sixth task</h2>
+    <p>Max values of nested arrays</p>
+    <script>
+        var initialArray = [[1, 3, 8],[-10, 36, 6],[-20, -44, -3],[70, 21, 32],[132, -5, 80],[0, 1, 2]];
+        document.write(initialArray.join('|'));
+
+        function getMaxValueFromArray(originArr) {
+            var maxResultsFromArray = [];
+            for (var i = 0; i < originArr.length; i++) {
+                var subArray = originArr[i];
+                var maxItemValue = subArray[0];
+                for (var j = 0; j < subArray.length; j++) {
+                    if (maxItemValue < subArray[j]) {
+                        maxItemValue = subArray[j];
+                    }
+                }
+
+                maxResultsFromArray.push(maxItemValue);
+            }
+
+            return maxResultsFromArray;
+        }
+
+        document.write('<p>Max values: ' + getMaxValueFromArray(initialArray))
+    </script>
+
+    <h2>Seventh task</h2>
+    <p>Random color</p>
+    <button id="randomColor" style="width: 100px; height: 100px; border: none; outline: none; cursor: pointer">
+        Click me</button>
+    <script>
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+                color += letters[Math.round(Math.random() * 15)];
+            }
+            document.getElementById('randomColor').innerHTML = color;
+            return color;
+        }
+
+        document.getElementById('randomColor').addEventListener('click', function () {
+            document.getElementById('randomColor').style.backgroundColor = getRandomColor();
+        })
+    </script>
+
+    <h2>Eighth task</h2>
+    <p>Sort by callback func</p>
+    <span>Random unsorted numbers: </span>
+    <span id="randomUnsortedNumbers"></span>
+    <input type="button" value="Sort it! ==>" id="sortNumbersButton">
+    <span>Sorted numbers</span>
+    <span id="randomSortedNumbers"></span>
+
+    <script>
+        var randomNumbersArray = Array.from({length: 10}, () => Math.floor(Math.random() * 100));
+        document.getElementById('randomUnsortedNumbers').innerHTML = randomNumbersArray.join();
+        function sortCustom(arr) {
+            var sortedArray = [];
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] >= 50) {
+                    sortedArray += arr[i];
+                }
+            }
+
+            return sortedArray;
+        }
+        
+        function filterNumber() {
+        }
+        
+    </script>
 </body>
 </html>
