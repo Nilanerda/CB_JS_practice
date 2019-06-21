@@ -161,7 +161,7 @@
     </script>
 
     <h2>Eighth task</h2>
-    <p>Sort by callback func</p>
+    <p>Sort by callback func if num >= 50</p>
     <span>Random unsorted numbers: </span>
     <span id="randomUnsortedNumbers"></span>
     <input type="button" value="Sort it! ==>" id="sortNumbersButton">
@@ -171,20 +171,25 @@
     <script>
         var randomNumbersArray = Array.from({length: 10}, () => Math.floor(Math.random() * 100));
         document.getElementById('randomUnsortedNumbers').innerHTML = randomNumbersArray.join();
-        function sortCustom(arr) {
+        function sortCustom(arr, callback) {
             var sortedArray = [];
             for (var i = 0; i < arr.length; i++) {
-                if (arr[i] >= 50) {
-                    sortedArray += arr[i];
-                }
+                callback(arr[i], sortedArray);
             }
 
             return sortedArray;
         }
         
-        function filterNumber() {
+        function filterNumber(value, psortedArray) {
+            if (value >= 50) {
+                psortedArray.push(value);
+            }
         }
-        
+
+        document.getElementById('sortNumbersButton').addEventListener('click', function () {
+            var result = sortCustom(randomNumbersArray, filterNumber);
+            document.getElementById('randomSortedNumbers').innerHTML = result.join(',');
+        })
     </script>
 </body>
 </html>
